@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "mspOfferName": {
+            "value": "Vodafone Managed Services"
+        },
+        "mspOfferDescription": {
+            "value": "Managed Services for Vodafone customers  "
+        },
+        "managedByTenantId": {
+            "value": "e22861cb-ba60-48a7-8d82-fa8e4267a5bd"
+        },
+        "authorizations": {
+            "value": [
+                { 
+                    "principalId": "84185b04-2ff1-458b-a7a9-0258a8c0cc1d", 
+                    "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+                    "principalIdDisplayName": "Contributor" 
+                }
+                    ]
+                }                
+        }
+}
