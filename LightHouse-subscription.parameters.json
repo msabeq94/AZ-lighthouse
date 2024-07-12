@@ -17,6 +17,12 @@
                     "principalId": "84185b04-2ff1-458b-a7a9-0258a8c0cc1d", 
                     "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
                     "principalIdDisplayName": "Contributor" 
+                },
+                { 
+                    "principalId": "359f18d0-3da9-4196-b63c-c23608d283c1", 
+                    "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46",
+                    "principalIdDisplayName": "vf-core-subscription-level1-support"
+                    
                 }
                     ]
                 }                
