@@ -1,0 +1,72 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "mspOfferName": {
+            "type": "string",
+            "defaultValue": "Vodafone Group"
+        },
+        "mspOfferDescription": {
+            "type": "string",
+            "defaultValue": "Managed Services for Vodafone customers"
+        },
+        "managedByTenantId": {
+            "type": "string",
+            "defaultValue": "c567XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+        },
+        "authorizations": {
+            "type": "array",
+            "defaultValue": [
+                { 
+                    "principalId": "2008XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", 
+                    "roleDefinitionId": "b249XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+                    "principalIdDisplayName": "Contributor" 
+                },
+                { 
+                    "principalId": "2008XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", 
+                    "roleDefinitionId": "91c1XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+                    "principalIdDisplayName": "Managed Services Registration Assignment Delete Role" 
+                }
+            ]
+           
+        }              
+    },
+    "variables": {
+        "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
+        "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ManagedServices/registrationDefinitions",
+            "apiVersion": "2019-09-01",
+            "name": "[variables('mspRegistrationName')]",
+            "properties": {
+                "registrationDefinitionName": "[parameters('mspOfferName')]",
+                "description": "[parameters('mspOfferDescription')]",
+                "managedByTenantId": "[parameters('managedByTenantId')]",
+                "authorizations": "[parameters('authorizations')]"
+            }
+        },
+        {
+            "type": "Microsoft.ManagedServices/registrationAssignments",
+            "apiVersion": "2019-09-01",
+            "name": "[variables('mspAssignmentName')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+            ],
+            "properties": {
+                "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+            }
+        }
+    ],
+    "outputs": {
+        "mspOfferName": {
+            "type": "string",
+            "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
+        },
+        "authorizations": {
+            "type": "array",
+            "value": "[parameters('authorizations')]"
+        }
+    }
+}
