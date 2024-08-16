@@ -1,0 +1,109 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-08-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "mspOfferName": {
+            "type": "string",
+            "defaultValue": "LH-PCR-VF-IT"
+        },
+        "mspOfferDescription": {
+            "type": "string",
+            "defaultValue": "Managed Services for Vodafone customers"
+        },
+        "managedByTenantId": {
+            "type": "string",
+            "defaultValue": "c567db09-ef41-48b2-8c49-af7a34431545"
+        },
+        "authorizations": {
+            "type": "array",
+           "defaultValue": [
+            { 
+                "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3", 
+                "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+                "principalIdDisplayName": "Contributor" 
+            },
+            { 
+                "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3", 
+                "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46",
+                "principalIdDisplayName": "Managed Services Registration Assignment Delete Role" 
+            },
+            { 
+                "principalId": "c71fd2fc-b1d1-4895-b760-288fe7cb7262", 
+                "roleDefinitionId": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e",
+                "principalIdDisplayName": "Support Request Contributor"
+            },
+            { 
+                "principalId": "c71fd2fc-b1d1-4895-b760-288fe7cb7262", 
+                "roleDefinitionId": "0e5f05e5-9ab9-446b-b98d-1e2157c94125",
+                "principalIdDisplayName": "Quota Request Operator"
+            }
+        ]
+        },
+        "eligibleAuthorizations": {
+            "type": "array",
+            "defaultValue": [
+                { 
+                    "justInTimeAccessPolicy": { 
+                        "multiFactorAuthProvider": "Azure", 
+                        "maximumActivationDuration": "PT8H" 
+                    },
+                    { 
+                        "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3", 
+                        "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+                        "principalIdDisplayName": "Contributor" 
+                    },
+                    { 
+                        "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3", 
+                        "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46",
+                        "principalIdDisplayName": "Managed Services Registration Assignment Delete Role" 
+                    }
+                }
+            ]
+            
+        }
+    },
+    "variables": {
+        "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
+        "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ManagedServices/registrationDefinitions",
+            "apiVersion": "2020-02-01-preview",
+            "name": "[guid(parameters('mspOfferName'))]",
+            "properties": {
+                "registrationDefinitionName": "[parameters('mspOfferName')]",
+                "description": "[parameters('mspOfferDescription')]",
+                "managedByTenantId": "[parameters('managedByTenantId')]",
+                "authorizations": "[parameters('authorizations')]",
+                "eligibleAuthorizations": "[parameters('eligibleAuthorizations')]"
+            }
+        },
+        {
+            "type": "Microsoft.ManagedServices/registrationAssignments",
+            "apiVersion": "2020-02-01-preview",
+            "name": "[guid(parameters('mspOfferName'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+            ],
+            "properties": {
+                "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+            }
+        }
+    ],
+    "outputs": {
+        "mspOfferName": {
+            "type": "string",
+            "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
+        },
+        "authorizations": {
+            "type": "array",
+            "value": "[parameters('authorizations')]"
+        },
+        "eligibleAuthorizations": {
+            "type": "array",
+            "value": "[parameters('eligibleAuthorizations')]"
+        }
+    }
+}
+
