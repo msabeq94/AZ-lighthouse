@@ -12,22 +12,12 @@
         },
         "managedByTenantId": {
             "type": "string",
-            "defaultValue": "c567db09-ef41-48b2-8c49-af7a34431545"
+            "defaultValue": "d57b6fc3-6090-4c9b-a5a2-150d88d8b506"
         },
         "authorizations": {
             "type": "array",
-           "defaultValue": [        
-            { 
-                "principalId": "c71fd2fc-b1d1-4895-b760-288fe7cb7262", 
-                "roleDefinitionId": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e",
-                "principalIdDisplayName": "Support Request Contributor"
-            },
-            { 
-                "principalId": "c71fd2fc-b1d1-4895-b760-288fe7cb7262", 
-                "roleDefinitionId": "0e5f05e5-9ab9-446b-b98d-1e2157c94125",
-                "principalIdDisplayName": "Quota Request Operator"
-            }
-        ]
+           "defaultValue": []
+
         },
         "eligibleAuthorizations": {
             "type": "array",
@@ -37,21 +27,9 @@
                         "multiFactorAuthProvider": "Azure", 
                         "maximumActivationDuration": "PT8H" 
                     },
-                        "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3", 
+                        "principalId": "108f5478-8344-47aa-97fb-fff7e3444431", 
                         "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
                         "principalIdDisplayName": "Contributor" 
-                    
-                },
-                {
-                    "justInTimeAccessPolicy": { 
-                        "multiFactorAuthProvider": "Azure", 
-                        "maximumActivationDuration": "PT8H" 
-                    },
-                     
-                        "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3", 
-                        "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46",
-                        "principalIdDisplayName": "Managed Services Registration Assignment Delete Role" 
-                    
                 }
             ]
             

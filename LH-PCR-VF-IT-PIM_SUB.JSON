@@ -18,14 +18,9 @@
             "type": "array",
            "defaultValue": [        
             { 
-                "principalId": "c71fd2fc-b1d1-4895-b760-288fe7cb7262", 
-                "roleDefinitionId": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e",
-                "principalIdDisplayName": "Support Request Contributor"
-            },
-            { 
-                "principalId": "c71fd2fc-b1d1-4895-b760-288fe7cb7262", 
-                "roleDefinitionId": "0e5f05e5-9ab9-446b-b98d-1e2157c94125",
-                "principalIdDisplayName": "Quota Request Operator"
+                "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3", 
+                "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+                "principalIdDisplayName": "Reader" 
             }
         ]
         },
