@@ -1,0 +1,303 @@
+
+Azure Lighthouse POC Test Plan
+
+1. Introduction
+
+This document outlines the Proof of Concept (POC) test plan for Azure Lighthouse. The primary objective is to validate the onboarding and offboarding of customers using ARM templates integrated with Privileged Identity Management (PIM). This POC will test the deployment and management of customer subscriptions and resource groups through Azure Lighthouse.
+
+
+2. Objectives
+
+
+
+Test customer onboarding to Azure Lighthouse for both subscription and resource group management.
+
+
+
+Test the offboarding of customers by removing access via ARM templates.
+
+
+
+Ensure that ARM templates use PIM to control role assignments.
+
+
+
+Validate the seamless execution of both onboarding and offboarding processes.
+
+
+
+
+
+
+
+---
+
+
+
+3. Test Scenarios
+
+
+
+3.1. Onboarding Scenarios
+
+
+
+Scenario 1: Onboarding Customer to Manage Subscription
+
+
+
+Description: Test the onboarding of a customer to manage their Azure subscription via Azure Lighthouse.
+
+
+
+Steps:
+
+
+
+1. Access Azure Cloud Shell.
+
+
+
+
+
+2. Clone the GitHub repository containing the ARM template.
+
+
+
+
+
+3. Run the script to onboard the customer’s subscription to Azure Lighthouse.
+
+
+
+
+
+4. Validate the correct assignment of roles using PIM.
+
+
+
+
+
+5. Confirm the customer’s subscription appears in Azure Lighthouse.
+
+
+
+
+
+
+
+
+
+Scenario 2: Onboarding Customer to Manage Resource Group
+
+
+
+Description: Test the onboarding of a customer to manage a specific resource group.
+
+
+
+Steps:
+
+
+
+1. Access Azure Cloud Shell.
+
+
+
+
+
+2. Clone the GitHub repository containing the ARM template.
+
+
+
+
+
+3. Run the script to onboard the customer’s resource group to Azure Lighthouse.
+
+
+
+
+
+4. Validate the correct role assignment using PIM.
+
+
+
+
+
+5. Confirm the resource group is correctly listed and managed in Azure Lighthouse.
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+3.2. Offboarding Scenarios
+
+
+
+Scenario 3: Offboarding Customer from Subscription
+
+
+
+Description: Test the offboarding process to remove a customer’s access to their subscription.
+
+
+
+Steps:
+
+
+
+1. Access Azure Cloud Shell.
+
+
+
+
+
+2. Run the ARM template to remove the delegated access to the customer’s subscription.
+
+
+
+
+
+3. Validate that the customer’s subscription is no longer visible in Azure Lighthouse.
+
+
+
+
+
+
+
+
+
+Scenario 4: Offboarding Customer from Resource Group
+
+
+
+Description: Test the offboarding process to remove a customer’s access to a resource group.
+
+
+
+Steps:
+
+
+
+1. Access Azure Cloud Shell.
+
+
+
+
+
+2. Run the ARM template to remove delegated access to the customer’s resource group.
+
+
+
+
+
+3. Validate that the resource group is no longer managed under Azure Lighthouse.
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+4. Test Case Details
+
+
+
+For each scenario, the following details should be recorded:
+
+
+
+Test Case ID
+
+
+
+Test Description
+
+
+
+Expected Outcome
+
+
+
+Actual Outcome
+
+
+
+Status (Pass/Fail)
+
+
+
+Comments
+
+
+
+
+
+
+
+---
+
+
+
+5. Success Criteria
+
+
+
+The success of this POC will be determined by:
+
+
+
+Successful onboarding of customers for both subscription and resource group management.
+
+
+
+Proper use and validation of PIM for role assignments.
+
+
+
+Successful offboarding of customers, confirming that access has been revoked as expected.
+
+
+
+
+
+
+
+---
+
+
+
+6. Conclusion
+
+
+
+This test plan outlines the key scenarios for testing the onboarding and offboarding of customers to Azure Lighthouse. By following this test plan, we ensure a secure and efficient process for managing customer subscriptions and resource groups using Azure Lighthouse.
+
+
+
+
+
+---
+
+
+
+Let me know if this draft works for you, or if you need adjustments! We can start refining it and expanding details as needed.
