@@ -1,0 +1,81 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "mspOfferName": {
+            "type": "string",
+            "defaultValue": "LH-EasyCloudBackup"
+        },
+        "mspOfferDescription": {
+            "type": "string",
+            "defaultValue": "Managed Services for Vodafone Easy Cloud Backup customers"
+        },
+        "managedByTenantId": {
+            "type": "string",
+            "defaultValue": "c567db09-ef41-48b2-8c49-af7a34431545"
+        },
+        "authorizations": {
+            "type": "array",
+            "defaultValue": [
+                {
+                    "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3",
+                    "roleDefinitionId": "2a2b9908-6ea1-4ae2-8e65-a410df84e7d1",
+                    "principalIdDisplayName": "Storage Blob Data Reader"
+                },
+                {
+                    "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3",
+                    "roleDefinitionId": "a795c7a0-d4a2-40c1-ae25-d81f01202912",
+                    "principalIdDisplayName": "Backup Reader"
+                },
+                {
+                    "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3",
+                    "roleDefinitionId": "73c42c96-874c-492b-b04d-ab87d138a893",
+                    "principalIdDisplayName": "Log Analytics Reader"
+                },
+                {
+                    "principalId": "2008b8fa-6ff5-481a-8d34-ff69f54ec1c3",
+                    "roleDefinitionId": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e",
+                    "principalIdDisplayName": "Support Request Contributor"
+                }
+            ]
+        }
+    },
+    "variables": {
+        "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
+        "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ManagedServices/registrationDefinitions",
+            "apiVersion": "2019-09-01",
+            "name": "[variables('mspRegistrationName')]",
+            "properties": {
+                "registrationDefinitionName": "[parameters('mspOfferName')]",
+                "description": "[parameters('mspOfferDescription')]",
+                "managedByTenantId": "[parameters('managedByTenantId')]",
+                "authorizations": "[parameters('authorizations')]"
+            }
+        },
+        {
+            "type": "Microsoft.ManagedServices/registrationAssignments",
+            "apiVersion": "2019-09-01",
+            "name": "[variables('mspAssignmentName')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+            ],
+            "properties": {
+                "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+            }
+        }
+    ],
+    "outputs": {
+        "mspOfferName": {
+            "type": "string",
+            "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
+        },
+        "authorizations": {
+            "type": "array",
+            "value": "[parameters('authorizations')]"
+        }
+    }
+}
